@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: elective-aspnetcore-hw4-postgres
+    environment:
+      POSTGRES_DB: elective_shop
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: homework_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - elective-hw4-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d elective_shop"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  elective-hw4-postgres-data:
